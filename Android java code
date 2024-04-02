@@ -1,0 +1,19 @@
+private val CHANNEL = "fingerprint_channel"
+
+override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+  super.configureFlutterEngine(flutterEngine)
+  MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
+    if (call.method == "authenticateUser") {
+      val success = authenticateUser()
+      result.success(success)
+    } else {
+      result.notImplemented()
+    }
+  }
+}
+
+private fun authenticateUser(): Boolean {
+  // Implement fingerprint authentication logic using FingerprintManager API
+  // ...
+  return success
+}
