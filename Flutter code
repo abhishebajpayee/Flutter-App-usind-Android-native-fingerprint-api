@@ -1,0 +1,15 @@
+import 'package:flutter/services.dart';
+
+const MethodChannel fingerprintChannel = MethodChannel('fingerprint_channel');
+
+Future<bool> authenticateUser() async {
+  try {
+    final result = await fingerprintChannel.invokeMethod('authenticateUser');
+    return result;
+  } on PlatformException catch (e) {
+    print(e.message);
+    return false;
+  }
+}
+
+// Call authenticateUser() on a button press and handle result
